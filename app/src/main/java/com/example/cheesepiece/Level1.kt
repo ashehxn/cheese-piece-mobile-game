@@ -7,8 +7,14 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class Level1 : AppCompatActivity() {
+    companion object {
+        private const val GRID_WIDTH = 5 // Adjust according to your grid width
+        private const val GRID_HEIGHT = 5 // Adjust according to your grid height
+    }
+
     private val occupiedCells = mutableSetOf<Pair<Int, Int>>()
-    private val elementToCells = mutableMapOf<View, Set<Pair<Int, Int>>>()
+    private val elementToCells = mutableMapOf<View, MutableSet<Pair<Int, Int>>>()
+    private val allPairsForElements = mutableSetOf<Pair<Int, Int>>()
     private var initialX = 0f
     private var initialY = 0f
     private var offsetX = 0f
@@ -27,35 +33,22 @@ class Level1 : AppCompatActivity() {
         val imageView6 = findViewById<ImageView>(R.id.imageView6)
         val imageView7 = findViewById<ImageView>(R.id.imageView7)
 
-        // Add initial occupied cells for each element
-        addInitialOccupiedCells(imageView1, 0, 0)
-        addInitialOccupiedCells(imageView2, 2, 0)
-        addInitialOccupiedCells(imageView3, 2, 0)
-        addInitialOccupiedCells(imageView4, 3, 1)
-        addInitialOccupiedCells(imageView5, 1, 4)
-        addInitialOccupiedCells(imageView6, 3, 1)
-        addInitialOccupiedCells(imageView7, 3, 2)
-
-        imageView1.setOnTouchListener(touchListener)
-        imageView2.setOnTouchListener(touchListener)
-        imageView3.setOnTouchListener(touchListener)
-        imageView4.setOnTouchListener(touchListener)
-        imageView5.setOnTouchListener(touchListener)
-        imageView6.setOnTouchListener(touchListener)
-        imageView7.setOnTouchListener(touchListener)
+        setTouchListener(imageView1)
+        setTouchListener(imageView2)
+        setTouchListener(imageView3)
+        setTouchListener(imageView4)
+        setTouchListener(imageView5)
+        setTouchListener(imageView6)
+        setTouchListener(imageView7)
     }
 
-    private fun addInitialOccupiedCells(view: View, startGridX: Int, startGridY: Int) {
-        val cells = mutableSetOf<Pair<Int, Int>>()
-        val widthInCells = view.layoutParams.width / gridSize
-        val heightInCells = view.layoutParams.height / gridSize
-        for (i in startGridX until startGridX + widthInCells) {
-            for (j in startGridY until startGridY + heightInCells) {
-                cells.add(Pair(i, j))
-                occupiedCells.add(Pair(i, j))
-            }
-        }
-        elementToCells[view] = cells
+    private fun setTouchListener(view: View) {
+        view.setOnTouchListener(touchListener)
+        val occupiedCellsForElement = mutableSetOf<Pair<Int, Int>>()
+        val positions = findCoveredPositions(view)
+        occupiedCellsForElement.addAll(positions)
+        elementToCells[view] = occupiedCellsForElement
+        allPairsForElements.addAll(occupiedCellsForElement)
     }
 
     private val touchListener = View.OnTouchListener { view, event ->
@@ -70,17 +63,9 @@ class Level1 : AppCompatActivity() {
                 val newX = event.rawX - offsetX
                 val newY = event.rawY - offsetY
 
-                // Calculate the new grid position based on the new coordinates
-                val newGridX = (newX / gridSize).toInt()
-                val newGridY = (newY / gridSize).toInt()
-
-                // Check if the new grid position is occupied
-                val isOccupied = isCellOccupied(newGridX, newGridY)
-
-                // If the new position is not occupied or the element is being moved back to its original position,
-                // allow the movement
-                if (!isOccupied || (newGridX == (initialX / gridSize).toInt() && newGridY == (initialY / gridSize).toInt()))
-                {
+                // Check if the new position is within bounds
+                if (isWithinBounds(newX, newY, view.width, view.height)) {
+                    // Update the view's position
                     view.x = newX
                     view.y = newY
                 }
@@ -89,17 +74,38 @@ class Level1 : AppCompatActivity() {
                 val oldOccupiedCells = elementToCells[view] ?: emptySet()
                 oldOccupiedCells.forEach { removeOccupiedCell(it.first, it.second) }
 
-                val newGridX = (view.x / gridSize).toInt()
-                val newGridY = (view.y / gridSize).toInt()
-                addOccupiedCell(newGridX, newGridY)
+                val newGridX = ((view.x + gridSize / 2) / gridSize).toInt()
+                val newGridY = ((view.y + gridSize / 2) / gridSize).toInt()
+
+                // Add occupied cells for the new position
+                val positions = findCoveredPositions(view)
+                positions.forEach { addOccupiedCell(it.first, it.second) }
+
+                // Snap the view to the nearest grid position
                 snapToGridPosition(view)
 
+                // Update the elementToCells map
                 val newOccupiedCells = generateOccupiedCells(view)
-                elementToCells[view] = newOccupiedCells
+                elementToCells[view] = newOccupiedCells.toMutableSet()
                 newOccupiedCells.forEach { addOccupiedCell(it.first, it.second) }
             }
         }
         true
+    }
+
+    private fun findCoveredPositions(view: View): Set<Pair<Int, Int>> {
+        val newGridX = (view.x / gridSize).toInt()
+        val newGridY = (view.y / gridSize).toInt()
+        val widthInCells = view.width / gridSize
+        val heightInCells = view.height / gridSize
+
+        val coveredPositions = mutableSetOf<Pair<Int, Int>>()
+        for (i in newGridX until newGridX + widthInCells) {
+            for (j in newGridY until newGridY + heightInCells) {
+                coveredPositions.add(Pair(i, j))
+            }
+        }
+        return coveredPositions
     }
 
     private fun isCellOccupied(gridX: Int, gridY: Int): Boolean {
@@ -108,10 +114,12 @@ class Level1 : AppCompatActivity() {
 
     private fun addOccupiedCell(gridX: Int, gridY: Int) {
         occupiedCells.add(Pair(gridX, gridY))
+        allPairsForElements.add(Pair(gridX, gridY))
     }
 
     private fun removeOccupiedCell(gridX: Int, gridY: Int) {
         occupiedCells.remove(Pair(gridX, gridY))
+        allPairsForElements.remove(Pair(gridX, gridY))
     }
 
     private fun generateOccupiedCells(view: View): Set<Pair<Int, Int>> {
@@ -121,15 +129,31 @@ class Level1 : AppCompatActivity() {
         for (i in newGridX until newGridX + view.width / gridSize) {
             for (j in newGridY until newGridY + view.height / gridSize) {
                 cells.add(Pair(i, j))
+                allPairsForElements.add(Pair(i, j))
             }
         }
         return cells
     }
 
     private fun snapToGridPosition(view: View) {
-        val newGridX = (view.x / gridSize).toInt()
-        val newGridY = (view.y / gridSize).toInt()
-        view.x = (newGridX * gridSize).toFloat()
-        view.y = (newGridY * gridSize).toFloat()
+        val newGridX = ((view.x + gridSize / 2) / gridSize).toInt()
+        val newGridY = ((view.y + gridSize / 2) / gridSize).toInt()
+
+        // Calculate the actual position after snapping to the grid
+        val snappedX = newGridX * gridSize
+        val snappedY = newGridY * gridSize
+
+        // Check if the snapped position matches the original position
+        val epsilon = 0.001f // Small epsilon value to account for floating-point imprecisions
+        if (Math.abs(snappedX - view.x) > epsilon || Math.abs(snappedY - view.y) > epsilon) {
+            // Snap to the nearest grid position
+            view.x = snappedX.toFloat()
+            view.y = snappedY.toFloat()
+        }
+    }
+
+
+    private fun isWithinBounds(x: Float, y: Float, width: Int, height: Int): Boolean {
+        return x >= 0 && y >= 0 && x + width <= GRID_WIDTH * gridSize && y + height <= GRID_HEIGHT * gridSize
     }
 }
