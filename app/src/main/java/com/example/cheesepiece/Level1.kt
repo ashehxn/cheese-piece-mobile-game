@@ -1,18 +1,21 @@
 package com.example.cheesepiece
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
-import android.util.Log
+import java.util.concurrent.TimeUnit
 
 class Level1 : AppCompatActivity() {
-    companion object {
-        private const val MAX_GRID_WIDTH = 5
-        private const val MAX_GRID_HEIGHT = 5
-    }
+
+    private lateinit var timer: CountDownTimer
+    private var elapsedTimeInMillis: Long = 0
+    private var isTimerRunning = false
 
     private var offsetX = 0f
     private var offsetY = 0f
@@ -28,20 +31,20 @@ class Level1 : AppCompatActivity() {
     private var imageView7Position = mutableSetOf<Pair<Int, Int>>()
     private var allImageViewPositions = mutableSetOf<Pair<Int, Int>>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level1)
 
-        // Find image views and set touch listeners
+        // Initialize views
         val imageView1 = findViewById<ImageView>(R.id.imageView1)
-        val imageView2 = findViewById<ImageView>(R.id.imageView2)
+        val winningBox = findViewById<ImageView>(R.id.winningBox)
         val imageView3 = findViewById<ImageView>(R.id.imageView3)
         val imageView4 = findViewById<ImageView>(R.id.imageView4)
         val imageView5 = findViewById<ImageView>(R.id.imageView5)
         val imageView6 = findViewById<ImageView>(R.id.imageView6)
         val imageView7 = findViewById<ImageView>(R.id.imageView7)
 
+        // Initialize image positions
         imageView1Position = mutableSetOf(
             Pair(0, 0),
             Pair(1, 0)
@@ -76,7 +79,7 @@ class Level1 : AppCompatActivity() {
             Pair(3, 3)
         )
 
-
+        // Add all positions to the set of all positions
         allImageViewPositions.addAll(imageView1Position)
         allImageViewPositions.addAll(imageView2Position)
         allImageViewPositions.addAll(imageView3Position)
@@ -85,22 +88,57 @@ class Level1 : AppCompatActivity() {
         allImageViewPositions.addAll(imageView6Position)
         allImageViewPositions.addAll(imageView7Position)
 
-        Log.d("allImageViewPositions1", allImageViewPositions.toString())
-
+        // Set touch listeners for all ImageViews
         setTouchListener(imageView1)
-        setTouchListener(imageView2)
+        setTouchListener(winningBox)
         setTouchListener(imageView3)
         setTouchListener(imageView4)
         setTouchListener(imageView5)
         setTouchListener(imageView6)
         setTouchListener(imageView7)
+
+        // Start the timer
+        startTimer()
     }
+
+    private fun startTimer() {
+        if (!isTimerRunning) {
+            timer = object : CountDownTimer(Long.MAX_VALUE, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    elapsedTimeInMillis += 1000
+                    updateTimerText()
+                }
+
+                override fun onFinish() {
+                    // Timer finished
+                }
+            }
+            timer.start()
+            isTimerRunning = true
+        }
+    }
+
+    private fun stopTimer() {
+        if (isTimerRunning) {
+            timer.cancel()
+            isTimerRunning = false
+        }
+    }
+
+    private fun updateTimerText() {
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTimeInMillis)
+        val timeString = String.format("%02d", seconds)
+
+        findViewById<TextView>(R.id.time).text = timeString
+    }
+
 
     private fun setTouchListener(view: View) {
         view.setOnTouchListener(touchListener)
     }
 
     private val touchListener = View.OnTouchListener { view, event ->
+        var overlappingCells: Set<Pair<Int, Int>> = emptySet()
 
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
@@ -111,8 +149,8 @@ class Level1 : AppCompatActivity() {
                 val newX = event.rawX - offsetX
                 val newY = event.rawY - offsetY
 
-                val tempX = newX
-                val tempY = newY
+                var tempX = newX
+                var tempY = newY
 
                 if (isWithinBounds(newX, newY, view.width, view.height)) {
                     view.x = newX
@@ -122,15 +160,13 @@ class Level1 : AppCompatActivity() {
 
                     when (view) {
                         findViewById<ImageView>(R.id.imageView1) -> imageView1Position = newCoveredCells.toMutableSet()
-                        findViewById<ImageView>(R.id.imageView2) -> imageView2Position = newCoveredCells.toMutableSet()
+                        findViewById<ImageView>(R.id.winningBox) -> imageView2Position = newCoveredCells.toMutableSet()
                         findViewById<ImageView>(R.id.imageView3) -> imageView3Position = newCoveredCells.toMutableSet()
                         findViewById<ImageView>(R.id.imageView4) -> imageView4Position = newCoveredCells.toMutableSet()
                         findViewById<ImageView>(R.id.imageView5) -> imageView5Position = newCoveredCells.toMutableSet()
                         findViewById<ImageView>(R.id.imageView6) -> imageView6Position = newCoveredCells.toMutableSet()
                         findViewById<ImageView>(R.id.imageView7) -> imageView7Position = newCoveredCells.toMutableSet()
                     }
-                    view.x = tempX
-                    view.y = tempY
 
                     allImageViewPositions.clear()
                     allImageViewPositions.addAll(imageView1Position)
@@ -141,10 +177,29 @@ class Level1 : AppCompatActivity() {
                     allImageViewPositions.addAll(imageView6Position)
                     allImageViewPositions.addAll(imageView7Position)
 
+                    overlappingCells = newCoveredCells.intersect(allImageViewPositions)
+
+                    if (overlappingCells.isNotEmpty()) {
+                        view.x = tempX
+                        view.y = tempY
+
+                        allImageViewPositions.clear()
+                        allImageViewPositions.addAll(imageView1Position)
+                        allImageViewPositions.addAll(imageView2Position)
+                        allImageViewPositions.addAll(imageView3Position)
+                        allImageViewPositions.addAll(imageView4Position)
+                        allImageViewPositions.addAll(imageView5Position)
+                        allImageViewPositions.addAll(imageView6Position)
+                        allImageViewPositions.addAll(imageView7Position)
+                    }
+
                 }
             }
             MotionEvent.ACTION_UP -> {
                 snapToGridPosition(view)
+                if (view.id == R.id.winningBox) {
+                    checkWinningCondition()
+                }
             }
         }
         true
@@ -162,7 +217,7 @@ class Level1 : AppCompatActivity() {
     }
 
     private fun isWithinBounds(x: Float, y: Float, width: Int, height: Int): Boolean {
-        return x >= 0 && y >= 0 && x + width <= MAX_GRID_WIDTH * gridSize && y + height <= MAX_GRID_HEIGHT * gridSize
+        return x >= 0 && y >= 0 && x + width <= 5 * gridSize && y + height <= 5 * gridSize
     }
 
     private fun getCoveredGridCells(view: View): Set<Pair<Int, Int>> {
@@ -177,11 +232,43 @@ class Level1 : AppCompatActivity() {
         val endRow = ((view.y + view.height) / cellHeight).toInt()
 
         val coveredCells = mutableSetOf<Pair<Int, Int>>()
-        for (i in startColumn..<endColumn) {
-            for (j in startRow..<endRow) {
+        for (i in startColumn..endColumn-1) {
+            for (j in startRow..endRow-1) {
                 coveredCells.add(Pair(i, j))
             }
         }
         return coveredCells
     }
+
+    private fun calculateStarsAndScore(seconds: Long): Pair<Int, Int> {
+        val stars: Int
+        val score: Int
+
+        stars = when {
+            seconds < 30 -> 3
+            seconds < 60 -> 2
+            else -> 1
+        }
+
+        score = when (stars) {
+            3 -> 300
+            2 -> 200
+            else -> 100
+        }
+
+        return Pair(stars, score)
+    }
+
+    private fun checkWinningCondition() {
+        val winCells = setOf(Pair(4, 3), Pair(4, 4))
+        if (allImageViewPositions.containsAll(winCells)) {
+            stopTimer() // Stop the timer when the player wins
+            val seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTimeInMillis)
+            val (stars, score) = calculateStarsAndScore(seconds)
+            Toast.makeText(this, "Congratulations! You won with $stars stars! Score: $score", Toast.LENGTH_SHORT).show()
+
+
+        }
+    }
+
 }
