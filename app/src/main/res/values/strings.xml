@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CheesePiece</string>
+    <string name="total_score">Your Score</string>
+    <string name="replay">Replay</string>
+    <string name="next_lvl">Next Level</string>
+    <string name="lvl_map">Level Map</string>
+    <string name="quit">Quit</string>
 </resources>

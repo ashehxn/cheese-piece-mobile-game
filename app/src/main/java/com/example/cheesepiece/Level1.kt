@@ -1,5 +1,6 @@
 package com.example.cheesepiece
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
@@ -10,6 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
 import java.util.concurrent.TimeUnit
+import android.os.Handler
+import android.content.Intent
+
 
 class Level1 : AppCompatActivity() {
 
@@ -19,6 +23,11 @@ class Level1 : AppCompatActivity() {
 
     private var offsetX = 0f
     private var offsetY = 0f
+
+    private val PREFS_NAME = "MyPrefs"
+    private val LEVEL_1_SCORE_KEY = "Level1Score"
+    private val DEFAULT_SCORE = 0
+
 
     private val gridSize by lazy { resources.getDimensionPixelSize(R.dimen.box_size) }
 
@@ -132,6 +141,12 @@ class Level1 : AppCompatActivity() {
         findViewById<TextView>(R.id.time).text = timeString
     }
 
+    private fun saveScore(score: Int) {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt(LEVEL_1_SCORE_KEY, score)
+        editor.apply()
+    }
 
     private fun setTouchListener(view: View) {
         view.setOnTouchListener(touchListener)
@@ -265,9 +280,18 @@ class Level1 : AppCompatActivity() {
             stopTimer() // Stop the timer when the player wins
             val seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTimeInMillis)
             val (stars, score) = calculateStarsAndScore(seconds)
+
+            saveScore(score)
+
             Toast.makeText(this, "Congratulations! You won with $stars stars! Score: $score", Toast.LENGTH_SHORT).show()
 
-
+            Handler().postDelayed({
+                when (stars) {
+                    3 -> startActivity(Intent(this, Level1Stars3::class.java))
+                    2 -> startActivity(Intent(this, Level1Stars2::class.java))
+                    else -> startActivity(Intent(this, Level1Stars1::class.java))
+                }
+            }, 3000)
         }
     }
 
