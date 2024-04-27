@@ -5,4 +5,18 @@
     <string name="next_lvl">Next Level</string>
     <string name="lvl_map">Level Map</string>
     <string name="quit">Quit</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="lvl_select">Select a Level</string>
+    <string name="lvl1">Level 1</string>
+    <string name="lvl2">Level 2</string>
+    <string name="lvl3">Level 3</string>
+    <string name="lvl4">Level 4</string>
+    <string name="help">Help Karl to find the\nCheese Piece!</string>
+    <string name="play">Play</string>
+    <string name="score">Your Score</string>
+    <string name="back">Back</string>
+    <string name="zero">0</string>
 </resources>

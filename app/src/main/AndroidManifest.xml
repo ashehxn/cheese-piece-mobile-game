@@ -13,7 +13,16 @@
         android:theme="@style/Theme.CheesePiece"
         tools:targetApi="31">
         <activity
-            android:name=".LaunchScreen"
+            android:name=".ScoreSheet"
+            android:exported="false" />
+        <activity
+            android:name=".Level1"
+            android:exported="false" />
+        <activity
+            android:name=".LevelsMap"
+            android:exported="false" />
+        <activity
+            android:name=".Level2"
             android:exported="false" />
         <activity
             android:name=".Level1Stars3"
@@ -28,7 +37,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Level1"
+            android:name=".LaunchScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

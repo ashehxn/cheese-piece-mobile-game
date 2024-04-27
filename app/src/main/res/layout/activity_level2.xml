@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/element_1x3"
-    tools:context=".Level1">
+    tools:context=".Level2">
 
     <TextView
         android:id="@+id/textView3"
@@ -16,7 +16,7 @@
         android:background="@drawable/cheese_border"
         android:backgroundTint="@color/bg1"
         android:fontFamily="@font/kavoon"
-        android:text="@string/lvl1"
+        android:text="@string/lvl2"
         android:textAlignment="center"
         android:textColor="@color/txt_color"
         android:textSize="34sp"
@@ -62,7 +62,7 @@
         android:id="@+id/gameGrid"
         android:layout_width="375dp"
         android:layout_height="375dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/layoutbg"
         app:columnCount="5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,13 +73,13 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="150dp"
+            android:layout_width="225dp"
             android:layout_height="75dp"
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
             app:layout_column="0"
-            app:layout_columnSpan="2"
+            app:layout_columnSpan="3"
             app:layout_row="0" />
 
         <ImageView
@@ -89,20 +89,8 @@
             android:background="@drawable/cheese_border"
             android:padding="3dp"
             android:src="@drawable/cheese"
-            app:layout_column="2"
-            app:layout_row="0"
-            app:layout_rowSpan="2" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="75dp"
-            android:layout_height="300dp"
-            android:background="@drawable/block_border"
-            android:padding="5dp"
-            android:src="@drawable/element_1x3"
             app:layout_column="0"
-            app:layout_row="1"
-            app:layout_rowSpan="4" />
+            app:layout_row="1" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -116,15 +104,25 @@
             app:layout_rowSpan="3" />
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="300dp"
+            android:id="@+id/imageView3"
+            android:layout_width="150dp"
             android:layout_height="75dp"
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
-            app:layout_column="1"
-            app:layout_columnSpan="4"
-            app:layout_row="4" />
+            app:layout_column="3"
+            app:layout_row="1" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:background="@drawable/block_border"
+            android:padding="5dp"
+            android:src="@drawable/element_1x3"
+            app:layout_column="3"
+            app:layout_row="0"
+            app:layout_rowSpan="2" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -133,20 +131,20 @@
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
-            app:layout_column="3"
+            app:layout_column="2"
             app:layout_columnSpan="2"
-            app:layout_row="1" />
+            app:layout_row="3" />
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="75dp"
-            android:layout_height="150dp"
+            android:layout_width="225dp"
+            android:layout_height="75dp"
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
-            app:layout_column="3"
-            app:layout_row="2"
-            app:layout_rowSpan="2" />
+            app:layout_column="1"
+            app:layout_columnSpan="3"
+            app:layout_row="4" />
 
     </androidx.gridlayout.widget.GridLayout>
 

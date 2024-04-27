@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Level1Stars3"
-    android:background="@drawable/bgscoreimage">
+    android:background="@drawable/cheese">
 
     <View
         android:id="@+id/view"

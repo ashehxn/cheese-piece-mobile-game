@@ -8,8 +8,8 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="766dp"
-        android:layout_height="803dp"
+        android:layout_width="1639dp"
+        android:layout_height="1780dp"
         android:background="@drawable/menubg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="318dp"
-        android:layout_height="200dp"
+        android:layout_width="613dp"
+        android:layout_height="607dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,14 +28,14 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="200dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/play"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,14 +43,14 @@
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="200dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/score"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
