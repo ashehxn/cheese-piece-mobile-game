@@ -1,8 +1,11 @@
 package com.example.cheesepiece
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class ScoreSheet : AppCompatActivity() {
@@ -27,13 +30,21 @@ class ScoreSheet : AppCompatActivity() {
         score1TextView.text = "$score1"
 
         val score2TextView = findViewById<TextView>(R.id.textView11)
-        score1TextView.text = "$score2"
+        score2TextView.text = "$score2"
 
         val score3TextView = findViewById<TextView>(R.id.textView13)
-        score1TextView.text = "$score3"
+        score3TextView.text = "$score3"
 
         val score4TextView = findViewById<TextView>(R.id.textView15)
-        score1TextView.text = "$score4"
+        score4TextView.text = "$score4"
+
+        val backBtn = findViewById<Button>(R.id.button9)
+
+        backBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
     }
 
     private fun loadScore1(): Int {

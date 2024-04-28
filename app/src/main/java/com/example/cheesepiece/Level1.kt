@@ -13,6 +13,7 @@ import androidx.gridlayout.widget.GridLayout
 import java.util.concurrent.TimeUnit
 import android.os.Handler
 import android.content.Intent
+import android.widget.Button
 
 
 class Level1 : AppCompatActivity() {
@@ -108,6 +109,21 @@ class Level1 : AppCompatActivity() {
 
         // Start the timer
         startTimer()
+
+        val replayBtn = findViewById<Button>(R.id.button5)
+        val lvlMapBtn = findViewById<Button>(R.id.button6)
+
+        replayBtn.setOnClickListener {
+            val intent = Intent(this, Level1::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
+
+        lvlMapBtn.setOnClickListener {
+            val intent = Intent(this, LevelsMap::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
     }
 
     private fun startTimer() {

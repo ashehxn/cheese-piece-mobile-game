@@ -19,4 +19,20 @@
     <string name="score">Your Score</string>
     <string name="back">Back</string>
     <string name="zero">0</string>
+    <string name="how_to_play">How to Play</string>
+    <string name="instructions1">
+        •	Players are presented with a grid-based game board containing different types of pieces, including blocks and a cheese piece.\n\n
+        •	Players have to move the cheese piece to a given green box. To do that, players have to move other blocks to make space.
+    </string>
+    <string name="instructions2">
+        •	Players can’t move a block above other block. They have to make space for a move.\n\n
+        •  	And there is a timer. If a player moves the cheese piece into the green box,
+    </string>
+    <string name="instructions3">
+        1.	Under 30 seconds – Player will get 3 stars and 300 points\n
+        2.	Under 60 seconds – Player will get 2 stars and 200 points\n
+        3.	Else – Player will get only 1 star and 100 points
+    </string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
 </resources>

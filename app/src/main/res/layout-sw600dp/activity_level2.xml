@@ -6,21 +6,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/textbg"
     android:backgroundTint="@color/material_dynamic_primary40"
-    tools:context=".Level1">
+    tools:context=".Level2">
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="142dp"
-        android:layout_height="60dp"
+        android:layout_width="308dp"
+        android:layout_height="127dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/cheese_border"
         android:backgroundTint="@color/bg1"
         android:fontFamily="@font/kavoon"
-        android:text="@string/lvl1"
+        android:text="@string/lvl2"
         android:textAlignment="center"
         android:textColor="@color/txt_color"
-        android:textSize="34sp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +28,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="131dp"
+        android:layout_height="113dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +37,8 @@
 
         <View
             android:id="@+id/view2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/cheese_border"
             android:backgroundTint="@color/bg1" />
 
@@ -56,14 +56,14 @@
             android:gravity="center"
             android:text="@string/four"
             android:textColor="@color/txt_color"
-            android:textSize="34sp" />
+            android:textSize="60sp" />
     </RelativeLayout>
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gameGrid"
         android:layout_width="375dp"
         android:layout_height="375dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="400dp"
         android:background="@drawable/layoutbg"
         app:columnCount="5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,13 +74,13 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="150dp"
+            android:layout_width="225dp"
             android:layout_height="75dp"
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
             app:layout_column="0"
-            app:layout_columnSpan="2"
+            app:layout_columnSpan="3"
             app:layout_row="0" />
 
         <ImageView
@@ -90,20 +90,8 @@
             android:background="@drawable/cheese_border"
             android:padding="3dp"
             android:src="@drawable/cheese"
-            app:layout_column="2"
-            app:layout_row="0"
-            app:layout_rowSpan="2" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="75dp"
-            android:layout_height="300dp"
-            android:background="@drawable/block_border"
-            android:padding="5dp"
-            android:src="@drawable/element_1x3"
             app:layout_column="0"
-            app:layout_row="1"
-            app:layout_rowSpan="4" />
+            app:layout_row="1" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -117,15 +105,25 @@
             app:layout_rowSpan="3" />
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="300dp"
+            android:id="@+id/imageView3"
+            android:layout_width="150dp"
             android:layout_height="75dp"
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
-            app:layout_column="1"
-            app:layout_columnSpan="4"
-            app:layout_row="4" />
+            app:layout_column="3"
+            app:layout_row="1" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:background="@drawable/block_border"
+            android:padding="5dp"
+            android:src="@drawable/element_1x3"
+            app:layout_column="3"
+            app:layout_row="0"
+            app:layout_rowSpan="2" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -134,61 +132,61 @@
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
-            app:layout_column="3"
+            app:layout_column="2"
             app:layout_columnSpan="2"
-            app:layout_row="1" />
+            app:layout_row="3" />
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="75dp"
-            android:layout_height="150dp"
+            android:layout_width="225dp"
+            android:layout_height="75dp"
             android:background="@drawable/block_border"
             android:padding="5dp"
             android:src="@drawable/element_1x3"
-            app:layout_column="3"
-            app:layout_row="2"
-            app:layout_rowSpan="2" />
+            app:layout_column="1"
+            app:layout_columnSpan="3"
+            app:layout_row="4" />
 
     </androidx.gridlayout.widget.GridLayout>
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="124dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="371dp"
+        android:layout_height="474dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="84dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameGrid"
         app:srcCompat="@drawable/rat4" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="209dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="308dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="328dp"
         android:background="@drawable/cheese_border"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/kavoon"
         android:text="@string/help"
         android:textAlignment="center"
         android:textColor="@color/material_dynamic_neutral10"
-        android:textSize="16sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameGrid" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="287dp"
+        android:layout_height="91dp"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/replay"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button6"
@@ -197,15 +195,15 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="324dp"
+        android:layout_height="97dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/lvl_map"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

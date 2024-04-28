@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="142dp"
-        android:layout_height="60dp"
+        android:layout_width="451dp"
+        android:layout_height="161dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/cheese_border"
@@ -20,7 +20,7 @@
         android:text="@string/lvl1"
         android:textAlignment="center"
         android:textColor="@color/txt_color"
-        android:textSize="34sp"
+        android:textSize="96sp"
         app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,15 +37,15 @@
 
         <View
             android:id="@+id/view2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="142dp"
+            android:layout_height="146dp"
             android:background="@drawable/cheese_border"
             android:backgroundTint="@color/bg1" />
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_alignEnd="@+id/view2"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -56,20 +56,20 @@
             android:gravity="center"
             android:text="@string/four"
             android:textColor="@color/txt_color"
-            android:textSize="34sp" />
+            android:textSize="96sp" />
     </RelativeLayout>
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gameGrid"
         android:layout_width="375dp"
         android:layout_height="375dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="400dp"
         android:background="@drawable/layoutbg"
         app:columnCount="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent"
         app:rowCount="5">
 
         <ImageView
@@ -153,42 +153,41 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="124dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="384dp"
+        android:layout_height="465dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameGrid"
         app:srcCompat="@drawable/rat4" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="209dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="294dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/cheese_border"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/kavoon"
         android:text="@string/help"
         android:textAlignment="center"
         android:textColor="@color/material_dynamic_neutral10"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.548"
+        android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameGrid" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="376dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/replay"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button6"
@@ -197,15 +196,15 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="373dp"
+        android:layout_height="91dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/lvl_map"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

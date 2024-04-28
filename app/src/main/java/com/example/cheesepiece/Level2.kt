@@ -13,6 +13,7 @@ import androidx.gridlayout.widget.GridLayout
 import java.util.concurrent.TimeUnit
 import android.os.Handler
 import android.content.Intent
+import android.widget.Button
 
 
 class Level2 : AppCompatActivity() {
@@ -101,6 +102,21 @@ class Level2 : AppCompatActivity() {
         setTouchListener(imageView7)
 
         startTimer()
+
+        val replayBtn = findViewById<Button>(R.id.button5)
+        val lvlMapBtn = findViewById<Button>(R.id.button6)
+
+        replayBtn.setOnClickListener {
+            val intent = Intent(this, Level2::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
+
+        lvlMapBtn.setOnClickListener {
+            val intent = Intent(this, LevelsMap::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
     }
 
     private fun startTimer() {
@@ -279,9 +295,9 @@ class Level2 : AppCompatActivity() {
 
             Handler().postDelayed({
                 when (stars) {
-                    3 -> startActivity(Intent(this, Level1Stars3::class.java))
-                    2 -> startActivity(Intent(this, Level1Stars2::class.java))
-                    else -> startActivity(Intent(this, Level1Stars1::class.java))
+                    3 -> startActivity(Intent(this, Level2Stars3::class.java))
+                    2 -> startActivity(Intent(this, Level2Stars2::class.java))
+                    else -> startActivity(Intent(this, Level2Stars1::class.java))
                 }
             }, 3000)
         }

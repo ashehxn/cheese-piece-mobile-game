@@ -67,9 +67,9 @@
         android:background="@drawable/layoutbg"
         app:columnCount="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent"
         app:rowCount="5">
 
         <ImageView
@@ -155,17 +155,20 @@
         android:id="@+id/imageView9"
         android:layout_width="124dp"
         android:layout_height="160dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameGrid"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toEndOf="@+id/gameGrid"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         app:srcCompat="@drawable/rat4" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="209dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="155dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="104dp"
         android:background="@drawable/cheese_border"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/kavoon"
@@ -173,17 +176,17 @@
         android:textAlignment="center"
         android:textColor="@color/material_dynamic_neutral10"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintEnd_toStartOf="@+id/gameGrid"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameGrid" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
         android:text="@string/replay"
@@ -199,7 +202,7 @@
         android:id="@+id/button6"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/btn_bg"
         android:fontFamily="@font/kavoon"
