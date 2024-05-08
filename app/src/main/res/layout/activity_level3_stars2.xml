@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Level2Stars2"
+    tools:context=".Level3Stars2"
     android:background="@drawable/cheese">
 
     <View
